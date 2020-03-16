@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Note-taking App</title>
+
+<link href="xspreadsheet.css" rel="stylesheet"></head>
+<body onload="load()">
+<h2>Note-taking App -- Jackie An</h2>
+  <div id="x-spreadsheet-demo"></div>
+  <script>
+    function load(){
+      // x.spreadsheet.locale('zh-cn');
+      var xs = x.spreadsheet('#x-spreadsheet-demo', {
+          showToolbar: true,
+          showGrid: true,
+      }).loadData({
+          freeze: 'B3',
+          styles: [
+            {
+              bgcolor: '#f4f5f8',
+              textwrap: true,
+              color: '#900b09',
+              border: {
+                top: ['thin', '#0366d6'],
+                bottom: ['thin', '#0366d6'],
+                right: ['thin', '#0366d6'],
+                left: ['thin', '#0366d6'],
+              },
+            },
+          ],
+          merges: [
+            'C3:D4',
+          ],
+          rows: {
+            1: {
+              cells: {
+                0: { text: 'Hello' },
+                2: { text: 'This is JK Demo.' },
+              },
+            },
+            2: {
+              cells: {
+                0: { text: 'Note-taking', style: 0 },
+                1: { text: 'Hello' },
+                2: { text: '合并单元格功能测试', merge: [1, 1] },
+              }
+            },
+            8: {
+              cells: {
+                8: { text: 'Note-taking', style: 0 },
+              }
+            }
+          },
+          validations:[{
+            mode:'cell',
+            refs:['G1'],
+            required: false,
+            value: "11,12,21,22",
+            type: "list",
+            operator: "be",
+            message: "1234134134134134134134"
+          },],
+        }).change((cdata) => {
+          //console.log(cdata);
+          //console.log(xs.validate());
+        });
+    }
+  </script>
+  <!--script type="text/javascript" src="https://unpkg.com/x-data-spreadsheet@1.0.20/dist/locale/zh-cn.js"></script-->
+<script type="text/javascript" src="xspreadsheet.js"></script></body>
+</html>
